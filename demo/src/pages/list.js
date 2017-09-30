@@ -3,7 +3,7 @@
  * @Author: chen_huang 
  * @Date: 2017-09-29 16:40:19 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-09-29 18:05:07
+ * @Last Modified time: 2017-09-30 18:29:49
  */
 import React, { Component } from 'react'
 import {
@@ -16,6 +16,29 @@ import {
 } from 'react-native'
 
 import Item from '../components/Item'
+
+import { createStore } from 'redux';
+
+const initState = {
+    counter: 0
+}
+
+const reducer = (state = initState, action) => {
+    switch(action.type) {
+        case 'ADD':
+            return { counter: state.counter + 1  }
+        default: 
+            return state
+    }
+}
+
+const add = () => { { type: 'ADD'} }
+
+const store = createStore(reducer)
+
+alert(store.getState().counter)
+store.dispatch({ type: 'ADD'})
+alert(store.getState().counter)
 
 const movies = [
     {
