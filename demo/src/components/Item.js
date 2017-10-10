@@ -3,7 +3,7 @@
  * @Author: chen_huang 
  * @Date: 2017-09-27 23:49:24 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-09-29 01:14:07
+ * @Last Modified time: 2017-10-09 17:12:54
  */
 import React, { Component } from 'react'
 import {
@@ -11,7 +11,8 @@ import {
     View,
     Text,
     Image,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
 } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
@@ -39,9 +40,13 @@ const styles = StyleSheet.create({
 
 // 无状态组件
 const Item = (props) => {
-    const { title, image } = props
+    const { title, image, onPress } = props
     return (
-        <View style = { styles.root }>
+        // view组件中不能直接执行onpress这类的点击事件
+        // TouchableOpacity组件可以执行点击事件
+        <TouchableOpacity 
+            style = { styles.root }
+            onPress = { onPress }>
             <Image 
                 source = {{ uri: image }}
                 style = { styles.image }
@@ -50,7 +55,7 @@ const Item = (props) => {
                 numberOfLines = { 1 }
                 style = { styles.title }
             >{ title }</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 export default Item
